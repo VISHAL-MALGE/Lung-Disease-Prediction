@@ -1,0 +1,26 @@
+Step 1: Front End (HTML, CSS, JS)
+
+webapp/  <-- (New folder for frontend)
+│    ├── static/       <-- (For CSS, JS, images)
+│    ├── templates/    <-- (For HTML files)
+│    ├── app.py        <-- (Flask backend)
+│    ├── model.py      <-- (For loading and predicting the disease)
+│    ├── requirements.txt  <-- (List of dependencies)
+
+
+
+Step 2: Install Dependencies
+Open your terminal and run:
+
+pip install flask opencv-python numpy pandas
+
+
+Step 3: Create app.py (Flask Backend)
+
+Step 4: Create model.py (Disease Prediction Logic)
+
+Step 5: Create templates/index.html (Main Upload Page)
+
+Step 6: Create templates/result.html (Result Page)
+
+📌 Step 7: Run the Flask App

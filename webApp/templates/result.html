@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+</head>
+<body>
+    <h1>Prediction Result</h1>
+    <img src="{{ url_for('static', filename='uploads/' + filename) }}" width="300">
+    <p><strong>Disease Detected:</strong> {{ disease }}</p>
+    <p><strong>Affected Lung:</strong> {{ lung_side }}</p>
+    <p><strong>Description:</strong> {{ description }}</p>
+    <a href="/">Back to Upload</a>
+</body>
+</html>
