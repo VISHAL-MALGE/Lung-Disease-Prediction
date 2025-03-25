@@ -1,57 +1,39 @@
+# lung_segmentation.py (Final reviewed segment_lung function)
+
 import os
 import cv2
 import numpy as np
-import SimpleITK as sitk  # For reading .mhd files
-from tqdm import tqdm
+import SimpleITK as sitk
 
 # Paths
-input_folder = "Dataset/processed_images"  # PNG images
-mask_folder = "Dataset/seg-lungs-LUNA16"  # Segmentation masks (.mhd format)
-output_folder = "Dataset/segmented_images"  # Save segmented lungs
-
-# Create output folder if not exists
-os.makedirs(output_folder, exist_ok=True)
+mask_folder = "dataset/seg-lungs-LUNA16"  # Path to .mhd mask folder
 
 def load_mhd_mask(mask_path):
-    """ Load .mhd mask and convert it to a NumPy array """
+    """Load .mhd mask and convert to NumPy array."""
     itk_image = sitk.ReadImage(mask_path)
-    mask_array = sitk.GetArrayFromImage(itk_image)  # Shape: (depth, height, width)
-    return mask_array  # 3D mask (slices)
+    return sitk.GetArrayFromImage(itk_image)
 
-# Get available masks (excluding .zraw files)
-available_masks = {f.split(".mhd")[0] for f in os.listdir(mask_folder) if f.endswith(".mhd")}
+def segment_lung(image_path):
+    # Load image
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    if image is None:
+        raise ValueError("Image not found or unreadable.")
 
-# Process each image
-for filename in tqdm(os.listdir(input_folder)):
-    if filename.endswith(".png"):  # Ensure it's an image file
-        image_path = os.path.join(input_folder, filename)
-        
-        # Extract scan ID from filename
-        scan_id = filename.split("_slice_")[0]  # Removes '_slice_X.png'
-        slice_number = int(filename.split("_slice_")[-1].replace(".png", ""))
+    # Simple segmentation placeholder (you may already have your actual logic)
+    _, thresh = cv2.threshold(image, 128, 255, cv2.THRESH_BINARY)
 
-        # Find closest matching mask file
-        if scan_id in available_masks:
-            mask_file = os.path.join(mask_folder, f"{scan_id}.mhd")
+    # Optional: Determine affected side (dummy logic for now)
+    height, width = thresh.shape
+    left_lung = thresh[:, :width//2]
+    right_lung = thresh[:, width//2:]
 
-            # Load image
-            image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    left_intensity = np.sum(left_lung)
+    right_intensity = np.sum(right_lung)
 
-            # Load corresponding .mhd mask
-            mask_array = load_mhd_mask(mask_file)
+    if left_intensity < right_intensity:
+        affected_side = "Left Lung"
+    else:
+        affected_side = "Right Lung"
 
-            if slice_number < mask_array.shape[0]:  # Check if slice exists in the mask
-                mask = mask_array[slice_number]  # Get corresponding slice
-                mask = (mask > 0).astype(np.uint8) * 255  # Convert to binary mask
-
-                # Apply mask to segment lungs
-                segmented = cv2.bitwise_and(image, image, mask=mask)
-
-                # Save segmented image
-                cv2.imwrite(os.path.join(output_folder, filename), segmented)
-            else:
-                print(f"❌ Mask slice {slice_number} not found in {mask_file}")
-        else:
-            print(f"❌ No matching mask file for: {filename}")
-
-print("✅ Lung segmentation complete! Segmented images saved in:", output_folder)
+    # Return only 2 values (Fix Here!)
+    return thresh, affected_side

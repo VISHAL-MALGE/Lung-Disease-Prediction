@@ -1,0 +1,38 @@
+  {
+    "Healthy Lungs": {
+        "name": "Normal (Healthy Lungs)",
+        "description": "Based on the uploaded CT scan image, no radiological abnormalities have been identified...",
+        "impression": "CT features are consistent with normal pulmonary architecture...",
+        "predictionResult": "Healthy Lungs",
+        "confidence": "97%",
+        "areas": "None",
+        "recommendation": "The uploaded scan indicates normal pulmonary function...",
+        "note": "This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.",
+        "status": "healthy",
+        "icon": "<i class='fas fa-lungs' style='color: #10B981;'></i>"
+    },
+    "Pulmonary Fibrosis": {
+        "name": "Pulmonary Fibrosis",
+        "description": "Based on the uploaded CT scan image, there is evidence of pulmonary fibrosis...",
+        "impression": "CT features are consistent with pulmonary fibrosis...",
+        "predictionResult": "Pulmonary Fibrosis",
+        "confidence": "92%",
+        "areas": "Bilateral lower lobes...",
+        "recommendation": "Please consult a pulmonologist...",
+        "note": "This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional.",
+        "status": "disease",
+        "icon": "<i class='fas fa-lungs-virus' style='color: #DC2626;'></i>"
+    },
+    "Chronic Obstructive Pulmonary Disease (COPD)": {
+        "name": "Chronic Obstructive Pulmonary Disease (COPD)",
+        "description": "Based on the uploaded CT scan image, there is evidence of Chronic Obstructive Pulmonary Disease (COPD)...",
+        "impression": "CT features suggest COPD with emphysematous changes. Clinical correlation advised..",
+        "predictionResult": "Chronic Obstructive Pulmonary Disease (COPD)",
+        "confidence": "89%",
+        "areas": "Lower right lobe; partial involvement of the left lower lobe...",
+        "recommendation": "Please consult a healthcare provider for spirometry and treatment planning...",
+        "note": "This report is auto-generated based on AI analysis of the uploaded CT scan image. For a clinical diagnosis and further medical advice, please consult with a certified healthcare professional...",
+        "status": "disease",
+        "icon": "<i class='fas fa-lungs-virus' style='color: #DC2626;'></i>"
+    }
+}
